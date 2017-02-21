@@ -22,7 +22,7 @@ enum BITFIELD_ERRORS {
 
 class TBitField
 {
-public:
+private:
   int  BitLen; // длина битового поля - макс. к-во битов
   TELEM *pMem; // память для представления битового поля
   int  MemLen; // к-во эл-тов Мем для представления бит.поля

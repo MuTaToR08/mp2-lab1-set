@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
 	{
 		TBitField temp1(60);
 		TBitField temp(temp1);
-		temp.pMem[0] = 2;
+		
 		std::cin >> temp;
 		std::cout << temp;
 		std::cout << RUN_ALL_TESTS();
