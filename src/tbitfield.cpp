@@ -50,7 +50,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 {
 	if (n >= this->MemLen)
 		throw ERROR_INDEX;
-	return this->pMem[GetMemIndex(n)] & ~(1 << n);
+	return (1 << n%TBitField::GetBitInField());
 }
 
 int TBitField::GetBitInField()
@@ -75,21 +75,21 @@ void TBitField::SetBit(const int n) // установить бит
 {
 	if (n >= this->MemLen)
 		throw ERROR_INDEX;
-	this->pMem[GetMemIndex(n)] = GetMemMask(n)|(1<<n);
+	this->pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
 	if (n >= this->MemLen)
 		throw ERROR_INDEX;
-	this->pMem[GetMemIndex(n)] = GetMemMask(n);
+	this->pMem[GetMemIndex(n)] &= ~GetMemMask(n);
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
 	if (n >= this->MemLen)
 		throw ERROR_INDEX;
-  return ((this->pMem[GetMemIndex(n)] >> (n))&1);
+  return (this->pMem[GetMemIndex(n)] >> n)&1;
 }
 
 // битовые операции
