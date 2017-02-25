@@ -15,9 +15,9 @@ using namespace std;
 typedef unsigned int TELEM;
 
 enum BITFIELD_ERRORS {
-	ERROR_SIZE = 1,
-	ERROR_INDEX,
-	ERROR_VALUE
+	ERROR_BITFIELD_SIZE = 1,
+	ERROR_BITFIELD_INDEX,
+	ERROR_BITFIELD_VALUE
 };
 
 class TBitField
@@ -48,7 +48,9 @@ public:
   bool operator!=(const TBitField &bf) const; // сравнение
   TBitField& operator=(const TBitField &bf); // присваивание              (#П3)
   TBitField  operator|(const TBitField &bf); // операция "или"            (#О6)
+  TBitField&  operator|=(const TBitField &bf); // операция "или"            (#О6)
   TBitField  operator&(const TBitField &bf); // операция "и"              (#Л2)
+  TBitField&  operator&=(const TBitField &bf); // операция "и"              (#Л2)
   TBitField  operator~(void);                // отрицание                  (#С)
 
   friend istream &operator>>(istream &istr, TBitField &bf);       //      (#О7)
