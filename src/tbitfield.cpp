@@ -13,7 +13,7 @@ TBitField::TBitField(int len)
 	if (len <= 0)
 		throw ERROR_BITFIELD_SIZE;
 	this->MemLen = len;
-	this->BitLen = ((int)(len / TBitField::GetBitInField())+1)*sizeof(TELEM)*8;
+	this->BitLen = ((int)((len-1) / TBitField::GetBitInField())+1)*sizeof(TELEM)*8;
 	this->pMem = new TELEM[BitLen/ TBitField::GetBitInField()];
 	for (size_t i = 0; i < GetCountField(); i++)
 	{
@@ -181,7 +181,7 @@ TBitField TBitField::operator~(void) // отрицание
 	int CountBitNotUsed = this->BitLen - this->MemLen;
 	TELEM LastFieldBitMask = 0;
 	for (size_t i = 0; i < CountBitNotUsed; i++)
-		LastFieldBitMask |= 1 << i;
+		LastFieldBitMask |= 1 << TBitField::GetBitInField()-i-1;
 	
 	temp.pMem[this->GetCountField() - 1] ^= LastFieldBitMask;
 	return temp;
@@ -216,7 +216,7 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
 	for (size_t i = 0; i < bf.GetCountField(); i++)
 	{
-		for (size_t z = 0; z < TBitField::GetBitInField(); z++)
+		for (int z = TBitField::GetBitInField()-1; z >=0 ; z--)
 		{
 			if (z % 8 == 0 && z != 0)
 				ostr << " ";
